@@ -10,7 +10,7 @@ config();
 
 const app = express();
 const stats = new StatsD();
-
+console.log('app got here');
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
