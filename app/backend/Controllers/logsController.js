@@ -8,7 +8,7 @@ const pool = new Pool({
 const logsController = (req, res, next) => {
     pool.query(query.get)
         .then( logs => {
-            const textData = '';
+            let textData = '';
             for (let log of logs) {
                 textData += `${log.log}\n`;
             }
