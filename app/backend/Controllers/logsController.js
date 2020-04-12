@@ -10,6 +10,7 @@ const logsController = (req, res, next) => {
         .then( logs => {
             let textData = '';
             for (let log of logs) {
+                console.log(log);
                 textData += `${log.log}\n`;
             }
             res.json(textData);
