@@ -12,7 +12,8 @@ const app = express();
 const stats = new StatsD();
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
 });
 
 pool.on('connect', () => console.log('Connected to the database'));
