@@ -17,10 +17,6 @@ const pool = new Pool({
 
 pool.on('connect', () => console.log('Connected to the database'));
 
-pool.query(`CREATE TABLE logs(
-  log text NOT NULL
-)`);
-
 stats.socket.on('error',  error => {
   console.error(error.stack);
 });
