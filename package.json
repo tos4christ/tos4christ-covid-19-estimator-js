@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint ./src/",
     "build": "babel backend -d build && babel src -d build",
-    "start": "npm run build && node build/server.js"
+    "start": "npm run build && node build/server"
   },
   "engines": {
     "node": "12.16.0"
