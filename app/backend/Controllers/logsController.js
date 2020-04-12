@@ -13,7 +13,8 @@ const logsController = (req, res, next) => {
             for (let log of data) {
                 textData += `${log.log}\n`;
             }
-            res.json(textData);
+            res.set('Content-Type', 'text/plain');
+            res.send(textData);
         })
 }
 
