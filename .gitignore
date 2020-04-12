@@ -9,6 +9,7 @@ lerna-debug.log*
 # My local files
 build/
 test.js
+yarn.lock
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
