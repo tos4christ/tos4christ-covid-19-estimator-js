@@ -25,16 +25,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(responseTime((req, res, time) => {
-  console.log(req.originalUrl, req.baseUrl);
   const log = `${Date.now()}    ${req.originalUrl}    done in ${time.toFixed(2)} seconds`;
-  pool.query(query.post, [log])
-    .then( logs => {
-      console.log(logs.rows);
-    })
+  pool.query(query.post, [log]);
 }));
-app.use('/test', (req, res, next) => {
-  res.json('this is the test passed');
-})
+
 app.use('/api/v1/on-covid-19', router);
 
 app.use((req, res, next) => {
