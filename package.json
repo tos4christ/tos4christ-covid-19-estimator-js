@@ -6,8 +6,8 @@
   "private": false,
   "scripts": {
     "lint": "eslint ./src/",
-    "build": "babel backend -d build && babel src -d build",
-    "start": "npm run build && node build/server"
+    "build": "babel app -d build",
+    "start": "npm run build && node build/backend/server"
   },
   "engines": {
     "node": "10.16.3"
