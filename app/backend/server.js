@@ -4,8 +4,7 @@ import app from './app';
 const server = http.createServer(app);
 
 const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || 'localhost';
 
-server.listen(PORT, HOST, () => {
-  console.log(`Server Started on ${HOST}:${PORT}`);
+server.listen(PORT, () => {
+  console.log(`Server Started on ${process.env.HOST}:${PORT}`);
 });
