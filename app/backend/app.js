@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(responseTime((req, res, time) => {
-  const log = `${Date.now()}    ${req.originalUrl}    done in ${time.toFixed(2)} seconds`;
+  const log = `${req.method}    ${req.originalUrl}    ${req.statusCode}   ${parseInt(time, 10)}ms`;
   pool.query(query.post, [log]);
 }));
 
