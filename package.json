@@ -7,8 +7,7 @@
   "scripts": {
     "lint": "eslint ./src/",
     "build": "babel backend -d build && babel src -d build",
-    "start-server": "node build/server.js",
-    "start": "npm run build && npm run start-server"
+    "start": "npm run build && node build/server.js"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
