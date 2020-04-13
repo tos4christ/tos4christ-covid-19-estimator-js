@@ -6,8 +6,9 @@
   "private": false,
   "scripts": {
     "lint": "eslint ./src/",
-    "build": "babel src -d build",
-    "start": "npm run build && node build/backend/server"
+    "build": "babel src -d build/src",
+    "build-backend": "babel backend -d build/backend",
+    "start": "npm run build && npm run build-backend && node build/backend/server"
   },
   "engines": {
     "node": "^12.16.0"

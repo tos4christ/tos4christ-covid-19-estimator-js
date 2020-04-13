@@ -1,4 +1,4 @@
-import estimator from '../../estimator';
+import estimator from '../../src/estimator';
 
 const jsonController = (req, res) => {
   const { body } = req;
