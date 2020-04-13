@@ -18,7 +18,9 @@ const logsController = (req, res) => {
       res.type('text/plain');
       res.contentType('text/plain');
       res.set('Content-Type', 'text/plain');
-      res.status(200).send(result);
+      res.status(200).format({
+        'text/plain': () => res.send(result)
+      });
     });
 };
 
