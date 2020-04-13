@@ -38,9 +38,9 @@ const covid19ImpactEstimator = (data) => {
   const sCFVBRT = 0.02 * severeImpact.infectionsByRequestedTime;
   severeImpact.casesForVentilatorsByRequestedTime = Math.ceil((sCFVBRT));
   // Dollars in flight
-  impact.dollarsInFlight = Math.ceil((input.region.avgDailyIncomePopulation
+  impact.dollarsInFlight = Math.floor((input.region.avgDailyIncomePopulation
    * input.region.avgDailyIncomeInUSD * impact.infectionsByRequestedTime) / duration);
-  severeImpact.dollarsInFlight = Math.ceil((severeImpact.infectionsByRequestedTime
+  severeImpact.dollarsInFlight = Math.floor((severeImpact.infectionsByRequestedTime
    * input.region.avgDailyIncomePopulation * input.region.avgDailyIncomeInUSD) / duration);
   // Output
   return { data: input, impact, severeImpact };
