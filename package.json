@@ -13,6 +13,11 @@
   "engines": {
     "node": "^12.16.0"
   },
+  "babel": {
+    "presets": [
+      "@babel/env"
+    ]
+  },
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
