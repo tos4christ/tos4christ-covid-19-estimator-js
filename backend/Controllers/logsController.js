@@ -14,8 +14,10 @@ const logsController = (req, res) => {
         textData += `${data.log}\n`;
         return textData;
       }, '');
-      res.contentType('application/text');
-      res.set('Content-Type', 'application/text');
+      res.setHeader('Content-Type', 'text/json');
+      res.type('text/json');
+      res.contentType('text/json');
+      res.set('Content-Type', 'text/json');
       res.status(200).send(result);
     });
 };
