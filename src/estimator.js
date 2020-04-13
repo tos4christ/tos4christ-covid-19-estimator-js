@@ -21,13 +21,13 @@ const covid19ImpactEstimator = (data) => {
   impact.infectionsByRequestedTime = impact.currentlyInfected * (2 ** requestedTime);
   severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * (2 ** requestedTime);
   // Severe Cases By Requested Time
-  impact.severeCasesByRequestedTime = Math.ceil((0.15 * impact.infectionsByRequestedTime));
+  impact.severeCasesByRequestedTime = Math.floor((0.15 * impact.infectionsByRequestedTime));
   const sCBRT = 0.15 * severeImpact.infectionsByRequestedTime;
-  severeImpact.severeCasesByRequestedTime = Math.ceil((sCBRT));
+  severeImpact.severeCasesByRequestedTime = Math.floor((sCBRT));
   // Hospital Beds by Requested Time
-  impact.hospitalBedsByRequestedTime = Math.ceil((0.35 * input.totalHospitalBeds))
+  impact.hospitalBedsByRequestedTime = Math.floor((0.35 * input.totalHospitalBeds))
    - impact.severeCasesByRequestedTime;
-  severeImpact.hospitalBedsByRequestedTime = Math.ceil((0.35 * input.totalHospitalBeds))
+  severeImpact.hospitalBedsByRequestedTime = Math.floor((0.35 * input.totalHospitalBeds))
    - severeImpact.severeCasesByRequestedTime;
   // Cases for ICU and Ventilators
   impact.casesForICUByRequestedTime = Math.floor((0.05 * impact.infectionsByRequestedTime));
