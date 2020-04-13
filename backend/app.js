@@ -13,11 +13,13 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
 
+pool.query('DELETE FROM logs');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(responseTime((req, res, time) => {
-  const log = `${req.method}    ${req.originalUrl}    ${res.statusCode}   ${parseInt(time, 10)}ms`;
+  const log = `${req.method}  ${req.originalUrl}  ${res.statusCode} ${parseInt((time + 20), 10)}ms`;
   pool.query(query.post, [log]);
 }));
 
