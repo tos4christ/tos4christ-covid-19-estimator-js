@@ -5,8 +5,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "lint": "eslint ./app/",
-    "build": "babel app -d build",
+    "lint": "eslint ./src/",
+    "build": "babel src -d build",
     "start": "npm run build && node build/backend/server"
   },
   "engines": {
