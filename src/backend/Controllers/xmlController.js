@@ -1,5 +1,5 @@
 import o2x from 'object-to-xml';
-import estimator from '../../src/estimator';
+import estimator from '../../estimator';
 
 const xmlController = (req, res) => {
   const { body } = req;
