@@ -30,18 +30,18 @@ const covid19ImpactEstimator = (data) => {
   severeImpact.hospitalBedsByRequestedTime = Math.ceil((0.35 * input.totalHospitalBeds))
    - severeImpact.severeCasesByRequestedTime;
   // Cases for ICU and Ventilators
-  impact.casesForICUByRequestedTime = parseInt((0.05 * impact.infectionsByRequestedTime), 10);
+  impact.casesForICUByRequestedTime = Math.ceil((0.05 * impact.infectionsByRequestedTime));
   const sCFICUBRT = 0.05 * severeImpact.infectionsByRequestedTime;
-  severeImpact.casesForICUByRequestedTime = parseInt((sCFICUBRT), 10);
+  severeImpact.casesForICUByRequestedTime = Math.ceil((sCFICUBRT));
   const iCFVBRT = 0.02 * impact.infectionsByRequestedTime;
-  impact.casesForVentilatorsByRequestedTime = parseInt((iCFVBRT), 10);
+  impact.casesForVentilatorsByRequestedTime = Math.ceil((iCFVBRT));
   const sCFVBRT = 0.02 * severeImpact.infectionsByRequestedTime;
-  severeImpact.casesForVentilatorsByRequestedTime = parseInt((sCFVBRT), 10);
+  severeImpact.casesForVentilatorsByRequestedTime = Math.ceil((sCFVBRT));
   // Dollars in flight
-  impact.dollarsInFlight = impact.infectionsByRequestedTime * input.region.avgDailyIncomePopulation
-   * (input.region.avgDailyIncomeInUSD * duration);
-  severeImpact.dollarsInFlight = severeImpact.infectionsByRequestedTime
-   * input.region.avgDailyIncomePopulation * (input.region.avgDailyIncomeInUSD * duration);
+  impact.dollarsInFlight = Math.floor((input.region.avgDailyIncomePopulation
+   * input.region.avgDailyIncomeInUSD * impact.infectionsByRequestedTime) / duration);
+  severeImpact.dollarsInFlight = Math.floor((severeImpact.infectionsByRequestedTime
+   * input.region.avgDailyIncomePopulation * input.region.avgDailyIncomeInUSD) / duration);
   // Output
   return { data: input, impact, severeImpact };
 };
