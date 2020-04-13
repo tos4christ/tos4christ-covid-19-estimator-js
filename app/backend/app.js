@@ -13,11 +13,6 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
 
-// pool.on('connect', () => {
-//   console.log('Connected to the database');
-// });
-pool.query('DELETE FROM logs');
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
