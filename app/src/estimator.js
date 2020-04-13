@@ -22,7 +22,8 @@ const covid19ImpactEstimator = (data) => {
   severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * (2 ** requestedTime);
   // Severe Cases By Requested Time
   impact.severeCasesByRequestedTime = parseInt((0.15 * impact.infectionsByRequestedTime), 10);
-  severeImpact.severeCasesByRequestedTime = parseInt((0.15 * severeImpact.infectionsByRequestedTime), 10);
+  const sCBRT = 0.15 * severeImpact.infectionsByRequestedTime;
+  severeImpact.severeCasesByRequestedTime = parseInt((sCBRT), 10);
   // Hospital Beds by Requested Time
   impact.hospitalBedsByRequestedTime = parseInt((0.35 * input.totalHospitalBeds), 10)
    - impact.severeCasesByRequestedTime;
@@ -30,9 +31,12 @@ const covid19ImpactEstimator = (data) => {
    - severeImpact.severeCasesByRequestedTime;
   // Cases for ICU and Ventilators
   impact.casesForICUByRequestedTime = parseInt((0.05 * impact.infectionsByRequestedTime), 10);
-  severeImpact.casesForICUByRequestedTime = parseInt((0.05 * severeImpact.infectionsByRequestedTime), 10);
-  impact.casesForVentilatorsByRequestedTime = parseInt((0.02 * impact.infectionsByRequestedTime), 10);
-  severeImpact.casesForVentilatorsByRequestedTime = parseInt((0.02 * severeImpact.infectionsByRequestedTime), 10);
+  const sCFICUBRT = 0.05 * severeImpact.infectionsByRequestedTime;
+  severeImpact.casesForICUByRequestedTime = parseInt((sCFICUBRT), 10);
+  const iCFVBRT = 0.02 * impact.infectionsByRequestedTime;
+  impact.casesForVentilatorsByRequestedTime = parseInt((iCFVBRT), 10);
+  const sCFVBRT = 0.02 * severeImpact.infectionsByRequestedTime;
+  severeImpact.casesForVentilatorsByRequestedTime = parseInt((sCFVBRT), 10);
   // Dollars in flight
   impact.dollarsInFlight = impact.infectionsByRequestedTime * input.region.avgDailyIncomePopulation
    * (input.region.avgDailyIncomeInUSD * duration);

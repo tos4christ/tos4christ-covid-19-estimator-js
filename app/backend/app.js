@@ -2,24 +2,18 @@ import { config } from 'dotenv';
 import express from 'express';
 import { Pool } from 'pg';
 import responseTime from 'response-time';
-import StatsD from 'node-statsd';
 import router from './Routers';
 import query from './Models/query';
 
 config();
 
 const app = express();
-const stats = new StatsD();
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
 
-pool.on('connect', () => console.log('Connected to the database'));
-
-stats.socket.on('error',  error => {
-  console.error(error.stack);
-});
+// pool.on('connect', () => console.log('Connected to the database'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
