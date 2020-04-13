@@ -10,7 +10,7 @@
     "start": "npm run build && node build/backend/server"
   },
   "engines": {
-    "node": "12.16.0"
+    "node": "^12.16.0"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
