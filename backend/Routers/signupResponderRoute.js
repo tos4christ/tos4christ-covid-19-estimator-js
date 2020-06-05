@@ -3,6 +3,6 @@ import responderController from '../Controllers/responderController';
 
 const router = new Router();
 
-router.post('/', responderController);
+router.post('/', responderController.register);
 
 export default router;
