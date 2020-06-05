@@ -13,7 +13,8 @@ const responderSchema = new Schema({
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
   lat: { type: Number, required: true },
-  lon: { type: Number, required: true }
+  lon: { type: Number, required: true },
+  creationdate: { type: Date, default: Date.now() }
 });
 
 const Responder = mongoose.model('Responders', responderSchema);
