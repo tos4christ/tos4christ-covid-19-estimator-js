@@ -1,12 +1,11 @@
 import { config } from 'dotenv';
 import express from 'express';
-import { Pool } from 'pg';
-import responseTime from 'response-time';
+// import { Pool } from 'pg';
+// import responseTime from 'response-time';
 import router from './Routers';
-import query from './Models/query';
+// import query from './Models/query';
 
 config();
-
 const app = express();
 
 app.use((req, res, next) => {
@@ -22,17 +21,17 @@ app.use((req, res, next) => {
   }
 });
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL
-});
+// const pool = new Pool({
+//   connectionString: process.env.DATABASE_URL
+// });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(responseTime((req, res, time) => {
-  const log = `${req.method}  ${req.originalUrl}  ${res.statusCode} ${parseInt((time + 20), 10)}ms`;
-  pool.query(query.post, [log]);
-}));
+// app.use(responseTime((req, res, time) => {
+// const log = `${req.method}  ${req.originalUrl}  ${res.statusCode} ${parseInt((time + 20), 10)}ms`
+//   pool.query(query.post, [log]);
+// }));
 
 app.use('/api/v1/on-covid-19', router);
 

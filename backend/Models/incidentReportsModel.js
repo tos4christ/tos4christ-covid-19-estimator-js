@@ -6,7 +6,8 @@ const { Schema } = mongoose;
 const IncidentReportModel = {};
 
 const irSchema = new Schema({
-  location: String,
+  lat: Number,
+  lon: Number,
   userId: { id: { type: Schema.Types.ObjectId, ref: 'Users' } },
   description: String,
   pictures: [{ type: Buffer }],

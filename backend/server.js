@@ -5,52 +5,38 @@ import userModel from './Models/userModel';
 import responderModel from './Models/responderModel';
 import findClosestStation from './utility/findClosestStation';
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 const server = http.createServer(app);
-
 const io = socketIo(server);
-
 
 // Function to run when a client connects to the server whereever it is hosted
 io.on('connection', (socket) => {
-  socket.username = 'Anonymous';
-  console.log(`${socket.username} just connected`);
-
   // set the socket name to the name of the responder who logged in
   socket.on('responderSignin', (data) => {
-    console.log('responder sign in data', data);
     socket.username = data.nameOfUnit;
-    console.log(data.nameOfUnit, 'this is the responder sign in action');
+    io.sockets.emit('responderNameChange', { name: socket.username });
   });
-
   // set the socket name to the name of the user who logged in
   socket.on('userSignin', (data) => {
-    console.log('user sign in data', data);
     socket.username = data.name;
-    console.log(data.name, 'this is the username sign in action');
     io.sockets.emit('usernameChange', { username: socket.username });
-    // userModel.findOne(data.email).then((user) => socket.username = user.name );
   });
-
   // SOS sent from victim
   socket.on('sos', (data) => {
-    console.log(data, 'this is the data');
-    // data = {userID: 'id', accidentLocation: {lat: '', lon: ''}}
-    userModel.findById(data.userID).then((user) => {
-      console.log(user, 'this is the user details');
+    // data = {userId: 'id', accidentLocation: {lat: '', lon: ''}}
+    userModel.findById(data.userId).then((user) => {
       // find the nearest fire station
-      responderModel.getAll((responders) => {
+      responderModel.getAll().then((responders) => {
         // data.accidentLocation should be in format = { lat: 6.3445645, lon: 3.4533255 }
         const closestStation = findClosestStation(data.accidentLocation, responders);
         // send the response team the medical records of the victim
         // the event name should be the name of the station so that socket.IO can target
         // that station's javascript socket connection
-        console.log(closestStation, 'this is the closest station');
-        io.sockets.emit(`${closestStation}`, { user, closestStation });
+        io.sockets.emit(`${closestStation}`, { user, accidentLocation: data.accidentLocation });
       });
-    });
+    })
+      .catch((e) => console.error(e));
   });
-
   // Eyewitness report from observers
   socket.on('report', (data) => {
     io.sockets.emit('replied', { message: 'thanks for your report, it will be treated immediately' });

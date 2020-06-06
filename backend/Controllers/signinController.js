@@ -39,7 +39,8 @@ const signinController = (req, res) => {
         error: 'Password does not match'
       });
     }
-  });
+  })
+    .catch((e) => console.error(e.message));
 };
 
 export default signinController;
