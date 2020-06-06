@@ -61,7 +61,8 @@ respondersController.signin = (req, res) => {
         data: {
           message: 'Your are now signed in',
           token,
-          userId
+          userId,
+          responderName: result.nameOfUnit
         }
       };
       res.status(200).json(responseBody);

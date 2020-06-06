@@ -27,7 +27,8 @@ const signinController = (req, res) => {
         data: {
           message: 'Your are now signed in',
           token,
-          userId
+          userId,
+          userName: result.name
         }
       };
 

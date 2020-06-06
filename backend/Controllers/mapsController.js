@@ -24,6 +24,7 @@ function findClosestStation(accidentLocation) {
       min = tempMin;
       closestStation = station;
     }
+    return tempMin;
   }, {});
   return closestStation;
 }
