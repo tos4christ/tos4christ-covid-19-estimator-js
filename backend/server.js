@@ -19,11 +19,13 @@ io.on('connection', (socket) => {
   // set the socket name to the name of the responder who logged in
   socket.on('responderSignin', (data) => {
     socket.username = data.nameOfUnit;
+    console.log(data.nameOfUnit, 'this is the responder sign in action');
   });
 
   // set the socket name to the name of the user who logged in
   socket.on('userSignin', (data) => {
     socket.username = data.name;
+    console.log(data.name, 'this is the username sign in action');
     io.sockets.emit('usernameChange', { username: socket.username });
     // userModel.findOne(data.email).then((user) => socket.username = user.name );
   });
@@ -32,6 +34,7 @@ io.on('connection', (socket) => {
   socket.on('sos', (data) => {
     // data = {userID: 'id', accidentLocation: {lat: '', lon: ''}}
     userModel.findById(data.userID).then((user) => {
+      console.log(user, 'this is the user details');
       // find the nearest fire station
       responderModel.getAll((responders) => {
         // data.accidentLocation should be in format = { lat: 6.3445645, lon: 3.4533255 }
@@ -39,6 +42,7 @@ io.on('connection', (socket) => {
         // send the response team the medical records of the victim
         // the event name should be the name of the station so that socket.IO can target
         // that station's javascript socket connection
+        console.log(closestStation, 'this is the closest station');
         io.sockets.emit(`${closestStation}`, { user, closestStation });
       });
     });
