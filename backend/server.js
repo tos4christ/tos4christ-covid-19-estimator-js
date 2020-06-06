@@ -18,12 +18,14 @@ io.on('connection', (socket) => {
 
   // set the socket name to the name of the responder who logged in
   socket.on('responderSignin', (data) => {
+    console.log('responder sign in data', data);
     socket.username = data.nameOfUnit;
     console.log(data.nameOfUnit, 'this is the responder sign in action');
   });
 
   // set the socket name to the name of the user who logged in
   socket.on('userSignin', (data) => {
+    console.log('user sign in data', data);
     socket.username = data.name;
     console.log(data.name, 'this is the username sign in action');
     io.sockets.emit('usernameChange', { username: socket.username });
@@ -32,6 +34,7 @@ io.on('connection', (socket) => {
 
   // SOS sent from victim
   socket.on('sos', (data) => {
+    console.log(data, 'this is the data');
     // data = {userID: 'id', accidentLocation: {lat: '', lon: ''}}
     userModel.findById(data.userID).then((user) => {
       console.log(user, 'this is the user details');
