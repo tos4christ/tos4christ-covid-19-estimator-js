@@ -18,9 +18,7 @@ io.on('connection', (socket) => {
 
   // set the socket name to the name of the responder who logged in
   socket.on('responderSignin', (data) => {
-    responderModel.getRespondersByEmail(data.email).then((responder) => {
-      socket.username = responder.nameOfUnit;
-    });
+    socket.username = data.nameOfUnit;
   });
 
   // set the socket name to the name of the user who logged in
@@ -41,7 +39,7 @@ io.on('connection', (socket) => {
         // send the response team the medical records of the victim
         // the event name should be the name of the station so that socket.IO can target
         // that station's javascript socket connection
-        io.sockets.emit('response', { user, closestStation });
+        io.sockets.emit(`${closestStation}`, { user, closestStation });
       });
     });
   });
