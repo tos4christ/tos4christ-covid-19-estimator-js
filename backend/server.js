@@ -32,6 +32,7 @@ io.on('connection', (socket) => {
         // send the response team the medical records of the victim
         // the event name should be the name of the station so that socket.IO can target
         // that station's javascript socket connection
+        console.log(closestStation, 'this is the closest station');
         io.sockets.emit(`${closestStation}`, { user, accidentLocation: data.accidentLocation });
       });
     })
