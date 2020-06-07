@@ -1,5 +1,6 @@
 import { config } from 'dotenv';
 import express from 'express';
+import cors from 'cors';
 // import { Pool } from 'pg';
 // import responseTime from 'response-time';
 import router from './Routers';
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 //   connectionString: process.env.DATABASE_URL
 // });
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
